@@ -1,3 +1,12 @@
+library(aplpack)
+library(MASS)
+library(ks)
+library(rgl)
+library(scatterplot3d)
+library(rgl)
+library(plotly)
+library(ddalpha)
+library(plot3Drgl)
 
 ##################################################################################################################
 ##################################################################################################################
@@ -32,35 +41,31 @@ p.Y
 
 ##################################################################################################################
 ##################################################################################################################
-# Visualizaci髇
+# Visualizaci贸n
 ##################################################################################################################
 ##################################################################################################################
 
 ##################################################################################################################
-# Obtener los boxplots (solo para las variables num閞icas)
+# Obtener los boxplots (solo para las variables num茅ricas)
 ##################################################################################################################
 
 par(mfrow=c(2,2))
 sapply(seq(1,4),function(j)boxplot(Y[,j],main=colnames(Y)[j],xlab="",col="blue"))
 
 ##################################################################################################################
-# Obtener los boxplots (solo para las variables num閞icas) separados por especie para cada variable
+# Obtener los boxplots (solo para las variables num茅ricas) separados por especie para cada variable
 ##################################################################################################################
 
 sapply(seq(1,4),function(j)boxplot(Y[,j]~Y[,5],main=colnames(Y)[j],xlab="",col="blue"))
-
 
 ##################################################################################################################
 # Obtener un bagplot 
 ##################################################################################################################
 
-install.packages("aplpack")
-library(aplpack)
 bagplot(Y$Sepal.Length,Y$Sepal.Width,xlab="Sepal.Length", ylab="Sepal.Width", main="Bagplot")
 
-
 ##################################################################################################################
-# Histogramas para las variables cuantitativas con m閠odo 髉timo para determinar el ancho de las barras (binwidth)
+# Histogramas para las variables cuantitativas con m茅todo 贸ptimo para determinar el ancho de las barras (binwidth)
 ##################################################################################################################
 
 par(mfrow=c(2,2))
@@ -75,17 +80,15 @@ hist(Y[1:50,3],main="Petal Length (setosa)",xlab="",col="blue",breaks = "Sturges
 hist(Y[51:100,3],main="Petal Length (versicolor)",xlab="",col="blue",breaks = "Sturges")
 hist(Y[101:150,3],main="Petal Length (virginica)",xlab="",col="blue",breaks = "Sturges")
 
-
 ##################################################################################################################
-# Densidad Kernel para las variables con el ancho de banda (bandwidth) 髉timo y el Kernel Gaussiano 
+# Densidad Kernel para las variables con el ancho de banda (bandwidth) 贸ptimo y el Kernel Gaussiano 
 ##################################################################################################################
 
 par(mfrow=c(2,2))
 sapply(seq(1,4),function(j)plot(density(Y[,j],kernel="gaussian"),main=colnames(Y)[j],xlab="",col="blue",lwd=2))
 
-
 ##################################################################################################################
-# Densidad Kernel para las variables con el ancho de banda (bandwidth) 髉timo y el Kernel Gaussiano y el Epanechnikov
+# Densidad Kernel para las variables con el ancho de banda (bandwidth) 贸ptimo y el Kernel Gaussiano y el Epanechnikov
 ##################################################################################################################
 
 par(mfrow=c(2,2))
@@ -94,19 +97,11 @@ sapply(seq(1,4),function(j){
   lines(density(Y[,j],kernel="epanechnikov"),main=colnames(Y)[j],xlab="",col="green",lwd=2)}
 )
 
-
 ##################################################################################################################
 # Densidad Kernel
 ##################################################################################################################
-install.packages("KernSmooth")
-install.packages("MASS")
-install.packages("ks")
-library(MASS)
-library(ks)
-
 
 bivkde=kde2d(Y$Sepal.Length, Y$Sepal.Width)
-library(rgl)
 col1=rainbow(length(bivkde$z))[rank(bivkde$z)]
 persp3d(bivkde,col=col1)
 play3d( spin3d( axis = c(0, 0, 1),    rpm = 7),duration = 100 )
@@ -124,36 +119,29 @@ plot(Sepal.Length,Petal.Length,pch=19,xlab="Sepal.Length",ylab="Petal.Length")
 # 3D-Scatterplot de Sepal.Length, Petal.Length y Petal.Width
 ##################################################################################################################
 
-library(scatterplot3d)
 scatterplot3d(Sepal.Length,Petal.Length,Petal.Width,pch=19,color=c("blue","green","orange")[Y[,5]]) # 3D scatterplot
 scatterplot3d(Sepal.Length,Petal.Length,Petal.Width,pch=19,color=c("blue","green","orange")[Y[,5]],type="h") # 3D scatterplot
 
-library(rgl)
 open3d() # Abrir una ventana de 3 dimensiones.
 plot3d(Sepal.Length,Petal.Length,Petal.Width,size=5,col=c("blue","green","orange")[Y[,5]]) # Las variables se pueden rotar
 
-library(plotly)
 plot_ly(Y,x=~Sepal.Length,y=~Petal.Length,z=~Petal.Width,color=c("blue","green","orange")[Y[,5]]) # Otra posibilidad
 
-library(plot3Drgl)
 plot3d( Y$Sepal.Length, Y$Sepal.Width, Y$Petal.Length, col = Y$Petal.Width,  type = "s",   radius = 0.1)
 play3d( spin3d( axis = c(0, 0, 1),    rpm = 7),duration = 100 )
 
 
 ##################################################################################################################
-# Scatterplot m鷏tiple, dividido por subgrupos en cada gr醘ico
+# Scatterplot m煤ltiple, dividido por subgrupos en cada gr谩fico
 ##################################################################################################################
 
 pairs(Y[,1:4],pch=19,col=c("blue","green","orange")[Y[,5]])
-
 
 ##################################################################################################################
 # Coordenadas paralelas
 ##################################################################################################################
 
 parcoord(Y[,1:4],col=c("blue","green","orange")[Y[,5]],var.label = TRUE)
-
-
 
 
 
@@ -164,8 +152,6 @@ parcoord(Y[,1:4],col=c("blue","green","orange")[Y[,5]],var.label = TRUE)
 ##################################################################################################################
 
 
-
-
 ##################################################################################################################
 # El vector de medias
 ##################################################################################################################
@@ -174,34 +160,27 @@ mu.Y <- colMeans(Y[,1:4])
 mu.Y
 
 
-
-
-
 ##################################################################################################################
 # Profundidad de Tukey
 ##################################################################################################################
 
 
-
-library(ddalpha)
-
-depth.Y <- depth.halfspace(Y[,1:4],Y[,1:4],num.directions=100000,seed=1) # Obtener la soluci髇 aproximada basada en 100000 proyecciones
+depth.Y <- depth.halfspace(Y[,1:4],Y[,1:4],num.directions=100000,seed=1) # Obtener la soluci贸n aproximada basada en 100000 proyecciones
 sort.depth.Y <- sort(depth.Y,decreasing=TRUE,index.return=TRUE) # Ordenar las profundidades
 
-depth.Y.sort <- sort.depth.Y$x # Las profundidades ordenadas, desde la m醩 profunda hasta la menos profunda, con respecto al centro
+depth.Y.sort <- sort.depth.Y$x # Las profundidades ordenadas, desde la m谩s profunda hasta la menos profunda, con respecto al centro
 depth.Y.sort
 
 depth.Y.sort.index <- sort.depth.Y$ix # Las filas asociadas a esas profundidades ya ordenadas
 depth.Y.sort.index
 
-# El indice de la primera es la m醩 profunda, es la mediana
+# El indice de la primera es la m?s profunda, es la mediana
 Y[,1:4][depth.Y.sort.index[1],]
 median=sort.depth.Y$ix[1]
 
 par(mfrow=c(1,1))
 plot(Y$Sepal.Length, Y$Sepal.Width,  xlab="Sepal.Length ", ylab="Sepal.Width ", pch=19,col=c("blue","green","orange")[Y[,5]])
 points(Y$Sepal.Length[median],Y$Sepal.Width[median], col = "red", pch=19,bg="red",lwd=2,cex=2)
-
 
 
 data=Y[,1:4]
@@ -224,7 +203,6 @@ points(Y$Sepal.Length[median2],Y$Sepal.Width[median2], col = "red", pch=19,bg="r
 points(Y$Sepal.Length[median3],Y$Sepal.Width[median3], col = "orange", pch=19,bg="orange",lwd=2,cex=2)
 
 
-
 ##################################################################################################################
 # La matriz de covarianza y de correlaciones con sus respectivos autovalores.
 ##################################################################################################################
@@ -242,7 +220,6 @@ R.Y
 eigen(R.Y) # Autovalores y autovectores de R
 sum(eigen(R.Y)$values) # Traza de la matriz R como la suma de autovalores 
 det(R.Y) # Determinante de R
-
 
 ##################################################################################################################
 # Transformaciones lineales
@@ -269,7 +246,6 @@ t(C) %*% S.Y %*% C
 # Scatterplot matrix
 pairs(Y[,1:4],pch=19,col=c("blue","green","orange")[Y[,5]])
 
-
 # Univariante
 sY <- scale(Y[,1:4])
 pairs(sY,pch=19,col=c("blue","green","orange")[Y[,5]])
@@ -287,4 +263,3 @@ SY <- Ytil %*% B
 colMeans(SY)
 cov(SY)
 pairs(SY,pch=19,col=c("blue","green","orange")[Y[,5]])
-

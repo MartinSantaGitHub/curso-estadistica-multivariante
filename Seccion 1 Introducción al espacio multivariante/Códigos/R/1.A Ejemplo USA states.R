@@ -1,3 +1,9 @@
+library(scatterplot3d)
+library(rgl)
+library(plotly)
+library(MASS)
+library(ddalpha)
+
 ##################################################################################################################
 ##################################################################################################################
 # USA dataset - Introduccion al espacio multivariante
@@ -9,13 +15,13 @@
 ##################################################################################################################
 
 
-
 ##################################################################################################################
 # Abrir el dataset llamado state.x77
 ##################################################################################################################
 
-?state.x77 #informaci髇 sobre el dataset
+?state.x77 #informaci贸n sobre el dataset
 #Cargar los datos
+class(state.x77)
 X <- as.data.frame(state.x77)
 X
 
@@ -33,7 +39,7 @@ p.X
 
 ##################################################################################################################
 ##################################################################################################################
-# Visualizaci髇
+# Visualizaci贸n
 ##################################################################################################################
 ##################################################################################################################
 
@@ -47,7 +53,6 @@ sapply(seq(1,8),function(j)boxplot(X[,j],main=colnames(X)[j],xlab="",col="blue")
 
 
 
-
 ##################################################################################################################
 # Histogramas para la variable "Murder" con diferentes anchos de barra (binwidth) - opcion "breaks"
 ##################################################################################################################
@@ -58,7 +63,7 @@ hist(X[,5],main="Murder with h=2",xlab="",col="blue",freq=FALSE,breaks=seq(min(X
 hist(X[,5],main="Murder with h=3",xlab="",col="blue",freq=FALSE,breaks=seq(min(X[,5]),max(X[,5])+3,by=3))
 
 ##################################################################################################################
-# Histogramas para todas las variables con ancho de barra "髉timo" - - opcion breaks=Sturges
+# Histogramas para todas las variables con ancho de barra "贸ptimo" - - opcion breaks=Sturges
 ##################################################################################################################
 
 par(mfrow=c(2,4))
@@ -66,14 +71,14 @@ sapply(seq(1,8),function(j)hist(X[,j],main=colnames(X)[j],xlab="",col="blue",bre
 
 
 ##################################################################################################################
-# Densidad Kernel para las variables con el ancho de banda (bandwidth) 髉timo y el Kernel Gaussiano 
+# Densidad Kernel para las variables con el ancho de banda (bandwidth) 贸ptimo y el Kernel Gaussiano 
 ##################################################################################################################
 
 par(mfrow=c(2,4))
 sapply(seq(1,8),function(j)plot(density(X[,j],kernel="gaussian"),main=colnames(X)[j],xlab="",col="blue",lwd=2))
 
 ##################################################################################################################
-# Densidad Kernel para las variables con el ancho de banda (bandwidth) 髉timo y el Kernel Gaussiano y el Epanechnikov
+# Densidad Kernel para las variables con el ancho de banda (bandwidth) ?ptimo y el Kernel Gaussiano y el Epanechnikov
 ##################################################################################################################
 
 sapply(seq(1,8),function(j){
@@ -95,34 +100,28 @@ plot(Income,`Life Exp`,pch=19,col="blue",xlab="Income",ylab="Life expectancy")
 # 3D-Scatterplots de Income, Life Expectancy y Murder
 ##################################################################################################################
 
-library(scatterplot3d)
+
 scatterplot3d(Income,`Life Exp`,Murder,pch=19,color="blue") # 3D scatterplot
 scatterplot3d(Income,`Life Exp`,Murder,pch=19,color="blue",type="h") # 3D scatterplot
 
-install.packages("Rcpp")
-library(rgl)
-open3d() # Abrir una ventana gr醘ica en 3 dimensiones
-plot3d(Income,`Life Exp`,Murder,size=5) # Se pueden rotar los ejes.
+open3d() # Abrir una ventana gr?fica en 3 dimensiones
+plot3d(Income,`Life Exp`,Murder,size=5,type = "h") # Se pueden rotar los ejes.
 
-library(plotly)
+
 plot_ly(X,x=~Income,y=~`Life Exp`,z=~Murder) # Otra posibilidad
 
 
 ##################################################################################################################
-# Scatterplot m鷏tiple de todas los pares de varaibles.
+# Scatterplot m煤ltiple de todas los pares de varaibles.
 ##################################################################################################################
 
 pairs(X,pch=19,col="blue")
-
-
 
 ##################################################################################################################
 # Coordenadas paralelas
 ##################################################################################################################
 
-library(MASS)
 parcoord(X,col="blue",var.label = TRUE)
-
 
 ##################################################################################################################
 ##################################################################################################################
@@ -143,18 +142,16 @@ mu.X
 # Profundidad de Tukey
 ##################################################################################################################
 
-library(ddalpha)
-
-depth.X <- depth.halfspace(X,X,num.directions=100000,seed=1) # Obtener la soluci髇 aproximada basada en 100000 proyecciones
+depth.X <- depth.halfspace(X,X,num.directions=100000,seed=1) # Obtener la soluci贸n aproximada basada en 100000 proyecciones
 sort.depth.X <- sort(depth.X,decreasing=TRUE,index.return=TRUE) # Ordenar las profundidades
 
-depth.X.sort <- sort.depth.X$x # Las profundidades ordenadas, desde la m醩 profunda hasta la menos profunda, con respecto al centro
+depth.X.sort <- sort.depth.X$x # Las profundidades ordenadas, desde la m谩s profunda hasta la menos profunda, con respecto al centro
 depth.X.sort
 
 depth.X.sort.index <- sort.depth.X$ix # Las filas asociadas a esas profundidades ya ordenadas
 depth.X.sort.index
 
-# El indice de la primera es la m醩 profunda, es la mediana
+# El indice de la primera es la m谩s profunda, es la mediana
 
 X[depth.X.sort.index[1],]
 
@@ -198,7 +195,3 @@ SX <- Xtil %*% B
 colMeans(SX)
 cov(SX)
 pairs(SX,pch=19,col="blue")
-
-
-
-

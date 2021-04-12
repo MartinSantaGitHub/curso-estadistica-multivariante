@@ -1,5 +1,9 @@
 # Simulando datos normales multivariantes
 library(MASS)
+library(corrplot)
+library(clusterGeneration)
+library(rgl)
+library(threejs)
 
 # Generar una muestra distribuida N(mu, Sigma) con correlacion moderada
 bivn <- mvrnorm(5000, mu =  c(0,0), Sigma = matrix(c(1, .5, .5, 1), 2) )  # utiliza Mass package
@@ -32,7 +36,6 @@ contour(bivn.kde, add = TRUE)
 persp(bivn.kde, phi = 45, theta = 30, shade = .1, border = NA) # base graphics package
 
 # RGL interactive plot
-library(rgl)
 col1 <- heat.colors(length(bivn.kde$z))[rank(bivn.kde$z)]
 persp3d(x=bivn.kde, col = col1)
 
@@ -43,8 +46,6 @@ col3 <- rainbow(length(bivn3.kde$z))[rank(bivn3.kde$z)]
 persp3d(x=bivn3.kde, col = col3)
 
 # threejs Javascript plot
-install.packages("threejs")
-library(threejs)
 
 # Desagrupar los datos obtenidos con kde  
 x <- bivn.kde$x; y <- bivn.kde$y; z <- bivn.kde$z
@@ -60,12 +61,9 @@ scatterplot3js(x=xx,y=yy,z=zz,size=0.2,color = col[ra],bg="black")
 
 
 ### Distribucion de alta dimension
-install.packages("corrplot")
-install.packages("clusterGeneration")
-library(corrplot)
-library(clusterGeneration)
+
 mu <- rep(0,10) 
-pdMat <- genPositiveDefMat(10,lambdaLow=10) #Generar auna matriz sigma def positiva
+pdMat <- genPositiveDefMat(10,lambdaLow=10) #Generar una matriz sigma def positiva
 Sigma <- pdMat$Sigma
 dim(Sigma) #cuadrada de 10x10
 mvn <- mvrnorm(5000, mu = mu, Sigma = Sigma )
@@ -74,4 +72,3 @@ corrplot(cor(mvn),
          method="ellipse",
          tl.pos="n",
          )
-

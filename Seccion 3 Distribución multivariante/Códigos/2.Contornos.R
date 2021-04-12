@@ -1,14 +1,11 @@
 # Annotating a filled contour plot
-install.packages("graphics")
-install.packages("grDevices")
-install.packages("MASS")
-install.packages("mvtnorm")
-install.packages("ellipse")
 library(ellipse)
 library(graphics)
 library(grDevices)
 library(MASS)
 library(mvtnorm)
+library(tidyverse)
+library(ggplot2)
 
 #################################### Example 1
 x.points <- seq(-3,4,length.out=100)
@@ -70,10 +67,6 @@ legend(-4,-2,legend=plot_legend,cex = 1, bty = "n")
 
 
 #################################### Example 5
-# Library
-install.packages("ggplot2")
-library(tidyverse)
-library(ggplot2)
 
 #Generar datos Normales estandar:
 bivn = mvrnorm(5000, mu =  c(0,0), Sigma = matrix(c(1, 0, 0, 1), 2) )
@@ -115,6 +108,3 @@ x <- mvrnorm(500, mu = c(0, 0, 0),
 # Mostrar contornos anidados de regiones de alta densidad
 plot(ks::kde(x = x, H = diag(c(rep(1.25, 3)))), drawpoints = TRUE, col.pt = 1)
 rgl::rglwidget()
-
-
-

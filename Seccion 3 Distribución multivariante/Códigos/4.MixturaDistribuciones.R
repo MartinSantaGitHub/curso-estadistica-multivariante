@@ -84,4 +84,3 @@ ggplot(a, aes(x=a1, y=a2) ) +
 # Area + contorno
 ggplot(a, aes(x=a1, y=a2) ) +
   stat_density_2d(aes(fill = ..level..), geom = "polygon", colour="white")
-

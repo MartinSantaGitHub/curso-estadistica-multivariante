@@ -8,7 +8,7 @@
 
 ##################################################################################################################
 ##################################################################################################################
-# Analisis de varianza multivariante con el dataset de Iris
+# Análisis de varianza multivariante con el dataset de Iris
 ##################################################################################################################
 ##################################################################################################################
 
@@ -61,17 +61,17 @@ lambdaa <- n * log(det(S)/det(SW))
 lambdaa
 
 # Percentil de la chi^2: chisq(1-nivel de signif, grados de libertad, lower.tail = F)
-# Veamos con un nivel de significacion peque?o 0.001 ---> nivel de confianza alto 0.999
+# Veamos con un nivel de significacion pequeño 0.001 ---> nivel de confianza alto 0.999
 chisq=qchisq(0.999, 8, lower.tail = F)
 chisq
 
-# Vemos que lambda=563>>0.86=chisq, rechazamos H_0, rechazamos la hip?tesis de que las medias de los grupos sean iguales.
+# Vemos que lambda=563>>0.86=chisq, rechazamos H_0, rechazamos la hipótesis de que las medias de los grupos sean iguales.
 
-#Vamos a usar ahora la otra definici?n de lambda que era para tama?os muestrales peque?os:
+# Vamos a usar ahora la otra definición de lambda que era para tamaños muestrales pequeños:
 h <- (n - 1) - (p + G)/2
 h
 
 lambda0 <- h * log(det(S)/det(SW))
 lambda0
 
-# Vemos que lambda=546>>0.86=chisq, rechazamos H_0, rechazamos la hip?tesis de que las medias de los grupos sean iguales.
+# Vemos que lambda=546>>0.86=chisq, rechazamos H_0, rechazamos la hipótesis de que las medias de los grupos sean iguales.

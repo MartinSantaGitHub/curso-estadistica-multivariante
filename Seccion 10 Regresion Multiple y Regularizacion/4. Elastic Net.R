@@ -1,8 +1,7 @@
-install.packages(c("glmnet", "faraway"))
 library(glmnet)   
 library(faraway) 
-install.packages("caret")
 library(caret)
+
 set.seed(1233)
 data("fat")
 head(fat)
@@ -22,7 +21,6 @@ X <- model.matrix(brozek ~  age + weight +
 
 #Y la variable dependiente
 Y <- fat[,"brozek"] 
-
 
 #Intervalo para alpha y lambda:
 search.grid <-expand.grid(alpha = seq(0,1,.1),
@@ -51,5 +49,3 @@ step.model$bestTune$lambda
 
 #Coeficientes 
 coef(step.model$finalModel, step.model$bestTune$lambda)
-
-

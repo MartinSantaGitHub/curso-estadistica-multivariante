@@ -18,11 +18,11 @@ datos=rbind(datos1,datos2)
 
 plot(datos,pch='*')
 
-#Correlación para los 100 datos N((0,0),I)   ------> 0.0009943199
+#CorrelaciÃ³n para los 100 datos N((0,0),I)   ------> 0.0009943199
 cor(datos1)[1,2]
 
-#Correlación para los 100 datos N((5,5),I)   ------> 0.05546129
+#CorrelaciÃ³n para los 100 datos N((5,5),I)   ------> 0.05546129
 cor(datos2)[1,2]
 
-#Correlación para los 200 datos              ------> 0.8614679
+#CorrelaciÃ³n para los 200 datos              ------> 0.8614679
 cor(datos)[1,2]

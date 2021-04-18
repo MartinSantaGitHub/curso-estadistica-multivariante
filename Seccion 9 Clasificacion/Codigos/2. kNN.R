@@ -1,11 +1,11 @@
 
 ##################################################################################################################
 ##################################################################################################################
-# Clasificaci髇 kNN
+# Clasificaci贸n kNN
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################
-# Cargar librer韆 MASS
+# Cargar librer铆a MASS
 ##################################################################################################################
 
 library(MASS)
@@ -28,7 +28,7 @@ y <- Z[,5]
 y
 
 ##################################################################################################################
-# Definir como n y p el n鷐ero de flores y el n鷐ero de variables
+# Definir como n y p el n煤mero de flores y el n煤mero de variables
 ##################################################################################################################
 
 n <- nrow(X)
@@ -47,7 +47,7 @@ pairs(X,main="Iris data set",pch=19,col=col.iris)
 
 ##################################################################################################################
 ##################################################################################################################
-# Clasificaci髇 con kNN
+# Clasificaci贸n con kNN
 ##################################################################################################################
 ##################################################################################################################
 set.seed(1000)
@@ -58,14 +58,16 @@ library(class)
 knn.class <- vector(mode="list",length=20)
 knn.tables <- vector(mode="list",length=20)
 knn.mis <- matrix(NA,nrow=20,ncol=1)
+
 for (k in 1 : 20){
   knn.class[[k]] <- knn.cv(X,y,k=k)
   knn.tables[[k]] <- table(y,knn.class[[k]])  
   knn.mis[k] <- n - sum(y==knn.class[[k]])
 }
+
 knn.mis
 
-# El n鷐ero 髉timo k de vecinos
+# El n煤mero 贸ptimo k de vecinos
 
 which(knn.mis==min(knn.mis))
 
@@ -76,7 +78,7 @@ knn.tables[[19]]
 k.opt <- 14
 k.opt
 
-# Veamos la clasificaci髇 para este valor de k
+# Veamos la clasificaci贸n para este valor de k
 
 knn.cv.opt <- knn.class[[k.opt]]
 knn.cv.opt
@@ -93,8 +95,7 @@ knn.mis[k.opt]
 
 knn.mis[k.opt]/n
 
-# Gr醘ico, buenas clasificaciones en rojo, mal clasificadas en negro
+# Gr谩fico, buenas clasificaciones en rojo, mal clasificadas en negro
 
 col.knn.iris <- c("black","indianred1")[1*(y==knn.cv.opt)+1]
 pairs(X,main="Good (in red) and bad (in black) classifications for the Iris data set with k-NN",pch=19,col=col.knn.iris)
-

@@ -1,6 +1,6 @@
-install.packages(c("glmnet", "faraway"))
 library(glmnet)   #ridge regression
 library(faraway) #dataset fat
+
 set.seed(1233)
 data("fat")
 head(fat)
@@ -23,7 +23,6 @@ Y <- fat[,"brozek"]
 
 #Correlacion entre las X (la mayoría muy altas)
 cor(X)
-
 
 #Primero vamos a hallar la cantidad de penalización (lambda) por validación cruzada. 
 
@@ -57,8 +56,6 @@ print(ridge.model)
 ridge.model$beta
 
 
-
-
 #Regresión OLS
 ols.regression <- lm(brozek ~  age + weight +                 
                        height + adipos +
@@ -68,16 +65,9 @@ ols.regression <- lm(brozek ~  age + weight +
                        biceps + forearm + 
                        wrist, data=fat)
 
-
 #OLS vs RIDGE
 round(cbind(OLS = coef(ols.regression), 
             ridge = c(ridge.model$a0,                              
                       as.vector(ridge.model$beta))),4)             
 
-
-
-
-
-
-
-
+summary(ridge.model$beta)

@@ -1,6 +1,8 @@
+library(cluster)
+
 ##################################################################################################################
 ##################################################################################################################
-# An醠isis de Cl鷖ter: M閠odos jer醨quicos
+# An谩lisis de Cl煤ster: M茅todos jer谩rquicos
 ##################################################################################################################
 ##################################################################################################################
 
@@ -26,13 +28,11 @@ p
 
 ##################################################################################################################
 ##################################################################################################################
-# M閠odo jer醨quico aglomerativo
+# M茅todo jer谩rquico aglomerativo
 ##################################################################################################################
 ##################################################################################################################
 
-# Cargamos la librer韆 cluster
-
-library(cluster)
+# Cargamos la librer铆a cluster
 
 # Estandarizamos los datos
 
@@ -48,21 +48,21 @@ Agnes.Euc.Single <- agnes(X.s,metric="euclidean",method="single")
 
 plot(Agnes.Euc.Single,main="Single linkage")
 
-# Cuantos clusters?
+# Cuantos clusters ?
 
 rect.hclust(Agnes.Euc.Single,k=3,border="blue")
 
-# Asignaci髇 de cada observacion a un cluster
+# Asignaci贸n de cada observacion a un cluster
 
 Cl.Agnes.Euc.Single <- cutree(Agnes.Euc.Single,3)
 Cl.Agnes.Euc.Single
 
-# Scatterplot matrix con la agrupaci髇 obtenida
+# Scatterplot matrix con la agrupaci贸n obtenida
 
 col.cluster <- c("blue","red","green")[Cl.Agnes.Euc.Single]
 pairs(X.s,col=col.cluster,main="Single linkage",pch=19)
 
-# 2 primeros componentes principales con la agrupaci髇 obtenida
+# 2 primeros componentes principales con la agrupaci贸n obtenida
 
 clusplot(X.s,Cl.Agnes.Euc.Single)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
@@ -83,21 +83,21 @@ Agnes.Euc.Complete <- agnes(X.s,metric="euclidean",method="complete")
 
 plot(Agnes.Euc.Complete,main="Complete linkage")
 
-# Cuantos clusters?
+# Cuantos clusters ?
 
 rect.hclust(Agnes.Euc.Complete,k=3,border="blue")
 
-# Asignaci髇 de cada observacion a un cluster
+# Asignaci贸n de cada observacion a un cluster
 
 Cl.Agnes.Euc.Complete <- cutree(Agnes.Euc.Complete,3)
 Cl.Agnes.Euc.Complete
 
-# Scatterplot matrix con la agrupaci髇 obtenida
+# Scatterplot matrix con la agrupaci贸n obtenida
 
 col.cluster <- c("blue","red","green")[Cl.Agnes.Euc.Complete]
 pairs(X.s,col=col.cluster,main="Complete linkage",pch=19)
 
-# 2 primeros componentes principales con la agrupaci髇 obtenida
+# 2 primeros componentes principales con la agrupaci贸n obtenida
 
 clusplot(X.s,Cl.Agnes.Euc.Complete)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
@@ -117,21 +117,21 @@ Agnes.Euc.Average <- agnes(X.s,metric="euclidean",method="average")
 
 plot(Agnes.Euc.Average,main="Average linkage")
 
-# Cuantos clusters?
+# Cuantos clusters ?
 
 rect.hclust(Agnes.Euc.Average,k=3,border="blue")
 
-# Asignaci髇 de cada observacion a un cluster
+# Asignaci贸n de cada observacion a un cluster
 
 Cl.Agnes.Euc.Average <- cutree(Agnes.Euc.Average,3)
 Cl.Agnes.Euc.Average
 
-# Scatterplot matrix con la agrupaci髇 obtenida
+# Scatterplot matrix con la agrupaci贸n obtenida
 
 col.cluster <- c("blue","red","green")[Cl.Agnes.Euc.Average]
 pairs(X.s,col=col.cluster,main="Average linkage",pch=19)
 
-# 2 primeros componentes principales con la agrupaci髇 obtenida
+# 2 primeros componentes principales con la agrupaci贸n obtenida
 
 clusplot(X.s,Cl.Agnes.Euc.Average)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
@@ -151,21 +151,21 @@ Agnes.Euc.Ward <- agnes(X.s,metric="euclidean",method="ward")
 
 plot(Agnes.Euc.Ward,main="Ward linkage")
 
-# Cuantos clusters?
+# Cuantos clusters ?
 
 rect.hclust(Agnes.Euc.Ward,k=3,border="blue")
 
-# Asignaci髇 de cada observacion a un cluster
+# Asignaci贸n de cada observacion a un cluster
 
 Cl.Agnes.Euc.Ward <- cutree(Agnes.Euc.Ward,3)
 Cl.Agnes.Euc.Ward
 
-# Scatterplot matrix con la agrupaci髇 obtenida
+# Scatterplot matrix con la agrupaci贸n obtenida
 
 col.cluster <- c("blue","red","green")[Cl.Agnes.Euc.Ward]
 pairs(X.s,col=col.cluster,main="Ward linkage",pch=19)
 
-# 2 primeros componentes principales con la agrupaci髇 obtenida
+# 2 primeros componentes principales con la agrupaci贸n obtenida
 
 clusplot(X.s,Cl.Agnes.Euc.Ward)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
@@ -177,7 +177,7 @@ plot(Sil.Agnes.Euc.Ward,main="Silhouette for Agnes and Ward",col="blue")
 
 ##################################################################################################################
 ##################################################################################################################
-#  M閠odo jer醨quico divisivo
+#  M茅todo jer谩rquico divisivo
 ##################################################################################################################
 ##################################################################################################################
 
@@ -187,21 +187,21 @@ Diana.Euc <- diana(X.s,metric="euclidean")
 
 plot(Diana.Euc,main="Diana")
 
-# Cuantos clusters?
+# Cuantos clusters ?
 
 rect.hclust(Diana.Euc,k=3,border="blue")
 
-# Asignaci髇 de cada observacion a un cluster
+# Asignaci贸n de cada observacion a un cluster
 
 Cl.Diana.Euc <- cutree(Diana.Euc,3)
 Cl.Diana.Euc
 
-# Scatterplot matrix con la agrupaci髇 obtenida
+# Scatterplot matrix con la agrupaci贸n obtenida
 
 col.cluster <- c("blue","red","green")[Cl.Diana.Euc]
 pairs(X.s,col=col.cluster,main="Diana",pch=19)
 
-# 2 primeros componentes principales con la agrupaci髇 obtenida
+# 2 primeros componentes principales con la agrupaci贸n obtenida
 
 clusplot(X.s,Cl.Diana.Euc)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")

@@ -1,7 +1,7 @@
 
 ##################################################################################################################
 ##################################################################################################################
-# An·lisis Factorial
+# An√°lisis Factorial
 ##################################################################################################################
 ##################################################################################################################
 
@@ -80,7 +80,7 @@ prop.var.accum
 
 ##################################################################################################################
 # Ahora vamos a estimar la matriz de carga usando los auto-valores y auto-vectores. 
-# Aplicaremos tambiÈn el mÈtodo varimax
+# Aplicaremos tambi√©n el m√©todo varimax
 ##################################################################################################################
 
 L.est.1 <- eigen.vec[,1:3] %*% diag(sqrt(eigen.val[1:3]))
@@ -97,7 +97,7 @@ Psi.est.1 <- diag(diag(R - as.matrix(L.est.1.var$loadings) %*% t(as.matrix(L.est
 Psi.est.1
 
 ##################################################################################################################
-# Ahora, podemos usar esta estimaciÛn para estimar mediante el mÈtodo Principal factor analysis (PFA)
+# Ahora, podemos usar esta estimaci√≥n para estimar mediante el m√©todo Principal factor analysis (PFA)
 ##################################################################################################################
 
 RP <- R - Psi.est.1
@@ -116,7 +116,7 @@ prop.var.accum
 
 ##################################################################################################################
 # Ahora, podemos estimar la matriz de carga de nuevo
-# Aplicaremos tambiÈn el mÈtodo varimax
+# Aplicaremos tambi√©n el m√©todo varimax
 ##################################################################################################################
 
 L.est.2 <- eigen.vec[,1:3] %*% diag(sqrt(eigen.val[1:3]))
@@ -133,7 +133,7 @@ Psi.est.2 <- diag(diag(R - as.matrix(L.est.2.var$loadings) %*% t(as.matrix(L.est
 Psi.est.2
 
 ##################################################################################################################
-# Obtengamos los "scores" para ambos mÈtodos
+# Obtengamos los "scores" para ambos m√©todos
 ##################################################################################################################
 # PCFA
 FS.est.1 <- scale(X) %*% as.matrix(L.est.1.var$loadings)
@@ -170,7 +170,7 @@ text(-FS.est.2[,2],FS.est.2[,3],labels=rownames(X),pos = 4,col="blue")
 ##################################################################################################################
 # Ahora, vamos a usar MLE para estimar la matriz de carga y los factores.
 # Note que MLE siempre escala los datos.
-# Por simplicidad vamos a usar el mÈtodo de regresiÛn para estimar los "scores".
+# Por simplicidad vamos a usar el m√©todo de regresi√≥n para estimar los "scores".
 ##################################################################################################################
 
 # Un factor
@@ -192,8 +192,9 @@ X.3
 
 X.4 <- factanal(X, factors = 4, rotation="varimax",scores="regression")
 X.4
+
 ##################################################################################################################
-# Estimacion de la matriz de carga y la matriz de covarianza de los errores
+# Estimaci√≥n de la matriz de carga y la matriz de covarianza de los errores
 ##################################################################################################################
 
 L.est.3.var <- X.4$loadings
@@ -202,7 +203,7 @@ L.est.3.var
 Psi.est.3 <- diag(X.4$uniquenesses)
 Psi.est.3
 
-# Gr·ficos
+# Gr?ficos
 
 par(mfrow=c(1,1))
 

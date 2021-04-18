@@ -13,7 +13,7 @@ X <- as.data.frame(state.x77)
 X
 
 ##################################################################################################################
-# Como podemos ver algunas de las variables tienen espacios en sus nombres, así que vamos a redefinir estos nombres.
+# Como podemos ver algunas de las variables tienen espacios en sus nombres, as? que vamos a redefinir estos nombres.
 ##################################################################################################################
 
 colnames(X)[4] = "Life.Exp"
@@ -130,5 +130,5 @@ text(scores[,2:3],labels=rownames(X),pos = 1,col="blue")
 # Correlacion entre los componentes principales y la variables originales 
 ##################################################################################################################
 
-Corr <- diag(eigen.val[1:3]^(1/2)) %*%  t(eigen.vec[,1:3])
+Corr <- diag(eigen.val[1:3]^(1/2)) %*% t(eigen.vec[,1:3])
 Corr

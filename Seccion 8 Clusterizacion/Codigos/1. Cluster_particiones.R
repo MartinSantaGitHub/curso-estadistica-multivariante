@@ -1,7 +1,8 @@
+library(cluster)
 
 ##################################################################################################################
 ##################################################################################################################
-# An醠isis de Cl鷖ter: M閠odo de particiones: k-means
+# An谩lisis de Cluster: M茅todo de particiones: k-means
 ##################################################################################################################
 ##################################################################################################################
 
@@ -23,7 +24,7 @@ colnames(X)[8] <- "Log-Area"
 ##################################################################################################################
 
 ##################################################################################################################
-# n, p: n鷐ero de estados, n鷐ero de variables
+# n, p: n煤mero de estados, n煤mero de variables
 ##################################################################################################################
 
 dim(X)
@@ -33,7 +34,7 @@ p <- dim(X)[2]
 p
 
 
-# Estandarizaci髇 univariante
+# Estandarizaci贸n univariante
 
 X.s <- scale(X)
 
@@ -50,14 +51,12 @@ SCDG
 Cl.kmeans <- Kmeans.3$cluster
 Cl.kmeans
 
-# Scatterplot matrix con la divisi髇 en grupos resultante
+# Scatterplot matrix con la divisi贸n en grupos resultante
 
 col.cluster <- c("blue","red","green")[Cl.kmeans]
 pairs(X.s,col=col.cluster,main="k-means",pch=19)
 
-# Visualizaci髇 con las primeras 2 componentes principales
-install.packages("cluster")
-library(cluster)
+# Visualizaci贸n con las primeras 2 componentes principales
 clusplot(X.s,Cl.kmeans)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
 
@@ -67,13 +66,9 @@ Sil.kmeans <- silhouette(Cl.kmeans,dist.Euc)
 plot(Sil.kmeans,main="Silhouette for k-means",col="blue")
 
 
-
-
-
-
 ##################################################################################################################
 ##################################################################################################################
-# M閠odo de particiones: pam partition around medoids
+# M茅todo de particiones: pam - partition around medoids
 ##################################################################################################################
 ##################################################################################################################
 
@@ -84,12 +79,12 @@ pam.3 <- pam(X.s,3)
 Cl.pam <- pam.3$clustering
 Cl.pam
 
-# Scatterplot matrix con la divisi髇 en grupos resultante
+# Scatterplot matrix con la divisi贸n en grupos resultante
 
 col.cluster <- c("blue","red","green")[Cl.pam]
 pairs(X.s,col=col.cluster,main="pam",pch=19)
 
-# Visualizaci髇 con las primeras 2 componentes principales
+# Visualizaci贸n con las primeras 2 componentes principales
 
 clusplot(X.s,Cl.pam)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
@@ -98,4 +93,3 @@ text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
 
 Sil.pam <- silhouette(Cl.pam,dist.Euc)
 plot(Sil.pam,main="Silhouette for pam",col="blue")
-

@@ -1,10 +1,10 @@
 ##################################################################################################################
 ##################################################################################################################
-# An·lisis discriminante lineal LDA
+# An√°lisis discriminante lineal LDA
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################
-# Cargar librerÌa MASS
+# Cargar librer√≠aa MASS
 ##################################################################################################################
 
 library(MASS)
@@ -27,7 +27,7 @@ y <- Z[,5]
 y
 
 ##################################################################################################################
-# Definir como n y p el n˙mero de flores y el n˙mero de variables
+# Definir como n y p el n√∫mero de flores y el n√∫mero de variables
 ##################################################################################################################
 
 n <- nrow(X)
@@ -50,7 +50,7 @@ lda.iris$class
 table.lda <- table(y,lda.iris$class)
 table.lda
 
-# ProporciÛn de errores
+# Proporci√≥n de errores
 
 mis.lda <- n - sum(y==lda.iris$class)
 mis.lda/n
@@ -64,7 +64,7 @@ pairs(X,main="Good (in red) and bad (in black) classifications for the Iris data
 
 lda.iris$posterior
 
-# Gr·fico de probabilidades
+# Gr√°fico de probabilidades
 
 plot(1:n,lda.iris$posterior[,1],main="Posterior probabilities (blue, group 1, green, group 2 and orange, group 3)",pch=20,col="blue",
      xlab="Observation number",ylab="Probabilities")
@@ -72,10 +72,9 @@ points(1:n,lda.iris$posterior[,2],pch=20,col="green")
 points(1:n,lda.iris$posterior[,3],pch=20,col="orange")
 
 
-
 ##################################################################################################################
 ##################################################################################################################
-# An·lisis discriminante cuadr·tico QDA
+# An√°lisis discriminante cuadr√°tico QDA
 ##################################################################################################################
 ##################################################################################################################
 
@@ -92,7 +91,7 @@ qda.iris$class
 table.qda <- table(y,qda.iris$class)
 table.qda
 
-# ProporciÛn de errores
+# Proporci√≥n de errores
 
 mis.qda <- n - sum(y==qda.iris$class)
 mis.qda/n
@@ -106,11 +105,9 @@ pairs(X,main="Good (in red) and bad (in black) classifications for the Iris data
 
 qda.iris$posterior
 
-# Gr·fico de probabilidades
+# Gr√°fico de probabilidades
 
 plot(1:n,qda.iris$posterior[,1],main="Posterior probabilities (blue, group 1, green, group 2 and orange, group 3)",pch=20,col="blue",
      xlab="Observation number",ylab="Probabilities")
 points(1:n,qda.iris$posterior[,2],pch=20,col="green")
 points(1:n,qda.iris$posterior[,3],pch=20,col="orange")
-
-

@@ -1,14 +1,16 @@
 
 ##################################################################################################################
 ##################################################################################################################
-# Regresi髇 log韘tica LR
+# Regresi贸n log铆stica LR
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################
-# Cargar librer韆 MASS
+# Cargar librer铆a MASS
 ##################################################################################################################
 
 library(MASS)
+library(nnet)
+
 set.seed(1000)
 ##################################################################################################################
 # Cargar los datos Iris
@@ -28,7 +30,7 @@ y <- Z[,5]
 y
 
 ##################################################################################################################
-# Definir como n y p el n鷐ero de flores y el n鷐ero de variables
+# Definir como n y p el n煤mero de flores y el n煤mero de variables
 ##################################################################################################################
 
 n <- nrow(X)
@@ -36,17 +38,14 @@ n
 p <- ncol(X)
 p
 
+# Cargar la librer铆a nnet
 
-# Cargar la librer韆 nnet
-
-library(nnet)
-
-# Definir un vector para incluir las clasificaciones de cada observaci髇 usando leave-one-out cross-validation
+# Definir un vector para incluir las clasificaciones de cada observaci贸n usando leave-one-out cross-validation
 
 lr.iris.class <- matrix(0,nrow=n,ncol=1)
 lr.iris.probs <- matrix(0,nrow=n,ncol=3)
 
-# Hacer la validaci髇 cruzada
+# Hacer la validaci贸n cruzada
 
 for (i in 1:n){
   print(i)
@@ -64,7 +63,7 @@ lr.iris.class
 table.lr <- table(y,lr.iris.class)
 table.lr
 
-# Proporci髇 de errores
+# Proporci贸n de errores
 
 mis.lr <- n - sum(y==lr.iris.class)
 mis.lr/n
@@ -78,10 +77,9 @@ pairs(X,main="Good (in red) and bad (in black) classifications for the Iris data
 
 lr.iris.probs
 
-# Gr醘ico de probabilidades
+# Gr谩fico de probabilidades
 
 plot(1:n,lr.iris.probs[,1],main="Posterior probabilities (blue, group 1, green, group 2 and orange, group 3)",pch=20,col="blue",
      xlab="Observation number",ylab="Probabilities")
 points(1:n,lr.iris.probs[,2],pch=20,col="green")
 points(1:n,lr.iris.probs[,3],pch=20,col="orange")
-

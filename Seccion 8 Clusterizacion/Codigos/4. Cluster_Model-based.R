@@ -1,10 +1,11 @@
+library(mclust)
+
 ##################################################################################################################
 ##################################################################################################################
-# Clúster basado en modelos: M-clust
+# ClÃºster basado en modelos: M-clust
 ##################################################################################################################
 ##################################################################################################################
 rm(list = ls()) 
-
 
 # Vamos a usar los datos originales sin escalarlos
 
@@ -24,9 +25,6 @@ n
 p <- dim(X)[2]
 p
 
-
-library(mclust)
-
 mclust.X <- Mclust(X,modelNames = c("VEE"))
 mclust.X
 
@@ -35,7 +33,7 @@ mclust.X
 Cl.mclust <- mclust.X$classification
 Cl.mclust
 
-# Scatterplot matrix con la agrupación obtenida
+# Scatterplot matrix con la agrupaciÃ³n obtenida
 
 col.cluster <- c("blue","red","green")[mclust.X$classification]
 pairs(X,col=col.cluster,main="M-clust solution",pch=19)
@@ -45,10 +43,6 @@ X.s <- scale(X)
 clusplot(X,Cl.mclust)
 text(princomp(X.s)$scores[,1:2],labels=rownames(X.s),pos = 1,col="blue")
 
-# Aquí están los parámetros del modelo de mixtura
+# AquÃ­ estÃ¡n los parÃ¡metros del modelo de mixtura
 
 mclust.X$parameters
-
-
-
-
